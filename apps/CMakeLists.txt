@@ -14,6 +14,8 @@ ci_make_app(
     SOURCES     ${SOURCE_LIST}
     LIBRARIES   mylibrary
     BLOCKS      Box2D
+    BLOCKS      Choreograph
+    BLOCKS      magic-window
 )
 
 target_compile_features(cinder-myapp PRIVATE cxx_std_14)

@@ -3,7 +3,6 @@
 #include "my_app.h"
 
 #include <cinder/app/App.h>
-#include <Box2D/Box2D.h>
 
 
 namespace myapp {
@@ -12,12 +11,15 @@ using cinder::app::KeyEvent;
 
 MyApp::MyApp() { }
 
-void MyApp::setup() { }
+void MyApp::setup() {
+    window.initialize();
+}
 
 void MyApp::update() { }
 
 void MyApp::draw() {
-    auto box = b2Draw();
+    window.draw();
+
 }
 
 void MyApp::keyDown(KeyEvent event) { }
