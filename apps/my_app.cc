@@ -11,16 +11,11 @@ using cinder::app::KeyEvent;
 
 MyApp::MyApp() { }
 
-void MyApp::setup() {
-    window.initialize();
-}
+void MyApp::setup() {}
 
 void MyApp::update() { }
 
-void MyApp::draw() {
-    window.draw();
-
-}
+void MyApp::draw() {}
 
 void MyApp::keyDown(KeyEvent event) { }
 
