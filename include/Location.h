@@ -33,10 +33,10 @@ class Location {
   bool operator>=(const Location& rhs) const;
 
   // Vector operators.
-  Location operator+(const Location& rhs) const;
+  Location* const operator+(const Location& rhs) const;
   // Note: Always returns positive coordinates.
   Location operator%(const Location& rhs) const;
-  Location operator-(const Location& rhs) const;
+  Location* const operator-(const Location& rhs) const;
   Location& operator+=(const Location& rhs);
   Location operator-() const;
 

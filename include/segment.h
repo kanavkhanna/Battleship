@@ -14,7 +14,7 @@ class Segment {
 
 
  public:
-  explicit Segment(const Location& location);
+  explicit Segment(Location* location);
   Location GetLocation() const;
   Location SetLocation(const Location&);
   void SetVisibility(bool visible);

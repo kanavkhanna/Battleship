@@ -2,23 +2,25 @@
 // Created by Kanav Khanna on 4/25/20.
 //
 
-#ifndef FINALPROJECT_BATTLESHIP_H
-#define FINALPROJECT_BATTLESHIP_H
+#ifndef FINALPROJECT_SHIP_H
+#define FINALPROJECT_SHIP_H
 
-#include "segment.h"
 #include <deque>
+
+#include "direction.h"
+#include "segment.h"
 
 using namespace std;
 
 namespace battleship {
 
-class Battleship {
+class Ship {
  private:
   std::deque<Segment> shipBody_;
   bool is_destroyed_;
 
  public:
-  Battleship();
+  Ship(int size, Location location, battleship::Direction direction);
 
   //returns size of the ship
   size_t Size() const;
@@ -41,4 +43,4 @@ class Battleship {
 
 }// namespace battleship
 
-#endif  // FINALPROJECT_BATTLESHIP_H
+#endif  // FINALPROJECT_SHIP_H

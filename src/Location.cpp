@@ -40,11 +40,11 @@ bool Location::operator>=(const Location& rhs) const {
   return !(*this < rhs);
 }
 
-Location Location::operator+(const Location& rhs) const {
+Location* const Location::operator+(const Location& rhs) const {
   return { row_ + rhs.row_, col_ + rhs.col_ };
 }
 
-Location Location::operator-(const Location& rhs) const {
+Location* const Location::operator-(const Location& rhs) const {
   return *this + (-rhs);
 }
 

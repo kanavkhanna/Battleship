@@ -5,7 +5,7 @@
 #include "segment.h"
 
 namespace battleship {
-Segment::Segment(const Location& location)
+Segment::Segment(Location* location)
     : location_(location), visible_{true} {}
 
 Location Segment::GetLocation() const { return location_; }
