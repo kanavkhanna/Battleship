@@ -2,7 +2,7 @@
 // Created by Kanav Khanna on 4/25/20.
 //
 
-#include "ship.h"
+#include "battleship/ship.h"
 
 namespace battleship {
 
@@ -12,7 +12,7 @@ Ship::Ship(int size, Location location, battleship::Direction direction) {
   for (int i = 0; i < size; i++) {
     switch (direction) {
       case Direction::kUp:
-        shipBody_.push_back(battleship::Segment(location - Location(0, i)));
+        shipBody_.push_back(battleship::Segment((location - Location(0, i))));
         break;
       case Direction::kDown:
         shipBody_.push_back(battleship::Segment(location + Location(0, i)));

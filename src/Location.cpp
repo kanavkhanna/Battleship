@@ -2,7 +2,7 @@
 // Created by Kanav Khanna on 4/25/20.
 //
 
-#include "Location.h"
+#include "battleship/Location.h"
 
 namespace battleship {
 
@@ -40,11 +40,11 @@ bool Location::operator>=(const Location& rhs) const {
   return !(*this < rhs);
 }
 
-Location* const Location::operator+(const Location& rhs) const {
+Location const Location::operator+(const Location& rhs) const {
   return { row_ + rhs.row_, col_ + rhs.col_ };
 }
 
-Location* const Location::operator-(const Location& rhs) const {
+Location const Location::operator-(const Location& rhs) const {
   return *this + (-rhs);
 }
 

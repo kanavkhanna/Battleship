@@ -2,10 +2,10 @@
 // Created by Kanav Khanna on 4/25/20.
 //
 
-#include "segment.h"
+#include "battleship/segment.h"
 
 namespace battleship {
-Segment::Segment(Location* location)
+Segment::Segment(Location location)
     : location_(location), visible_{true} {}
 
 Location Segment::GetLocation() const { return location_; }
