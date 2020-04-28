@@ -38,7 +38,10 @@ class Location {
   Location operator%(const Location& rhs) const;
   Location const operator-(const Location& rhs) const;
   Location& operator+=(const Location& rhs);
+  Location operator/(const int toDivide);
   Location operator-() const;
+
+  auto GetCenter() -> Location;
 
 };
 

@@ -3,25 +3,31 @@
 //
 
 #include "battleship/ship.h"
+#include <cinder/gl/gl.h>
+#include <cinder/gl/draw.h>
 
 namespace battleship {
 
+Ship::Ship() {}
+
 Ship::Ship(int size, Location location, battleship::Direction direction) {
-  is_destroyed_ = false;
+  texture_ = cinder::gl::Texture2d::create(cinder::loadImage(
+      "/Users/kanavkhanna/Downloads"
+      "/cinder_0.9.2_mac/my-projects/final-project-kanavk26/assets/ship.jpg" ));
 
   for (int i = 0; i < size; i++) {
     switch (direction) {
       case Direction::kUp:
-        shipBody_.push_back(battleship::Segment((location - Location(0, i))));
+        shipBody_.emplace_back((location - Location(0, i*30)));
         break;
       case Direction::kDown:
-        shipBody_.push_back(battleship::Segment(location + Location(0, i)));
+        shipBody_.emplace_back(location + Location(0, i*30));
         break;
       case Direction::kLeft:
-        shipBody_.push_back(battleship::Segment(location - Location(i,0)));
+        shipBody_.emplace_back(location - Location(i*30,0));
         break;
       case Direction::kRight:
-        shipBody_.push_back(battleship::Segment(location + Location(i,0)));
+        shipBody_.emplace_back(location + Location(i*30,0));
         break;
     }
   }
@@ -54,5 +60,15 @@ void Ship::DestroyPart(const Segment& shipPart) {
     is_destroyed_ = !part.IsVisibile();
   }
 }
+std::deque<Segment> Ship::GetShip() { return shipBody_; }
 
+vector<Location> Ship::ShipLocation() {
+  vector<Location> location;
+
+  for (Segment& part : shipBody_) {
+    location.emplace_back(part.GetLocation());
+  }
+  return location;
 }
+
+}  // namespace battleship

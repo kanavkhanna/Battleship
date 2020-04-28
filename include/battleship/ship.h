@@ -5,6 +5,9 @@
 #ifndef FINALPROJECT_SHIP_H
 #define FINALPROJECT_SHIP_H
 
+#include <cinder/gl/Shader.h>
+#include <cinder/gl/gl.h>
+
 #include <deque>
 
 #include "direction.h"
@@ -18,12 +21,18 @@ class Ship {
  private:
   std::deque<Segment> shipBody_;
   bool is_destroyed_;
+  cinder::gl::TextureRef texture_;
 
  public:
   Ship(int size, Location location, battleship::Direction direction);
 
+  Ship();
+
   //returns size of the ship
   size_t Size() const;
+
+  //returns the whole ship
+  std::deque<Segment> GetShip();
 
   //Destroys a part of the ship
   void DestroyPart(const Segment&);
@@ -37,6 +46,10 @@ class Ship {
   std::deque<Segment>::iterator end();
   std::deque<Segment>::const_iterator cbegin() const;
   std::deque<Segment>::const_iterator cend() const;
+
+  void Draw();
+
+  vector<Location> ShipLocation();
 
 
 };

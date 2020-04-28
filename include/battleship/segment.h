@@ -19,6 +19,7 @@ class Segment {
   Location SetLocation(const Location&);
   void SetVisibility(bool visible);
   bool IsVisibile() const;
+  void Draw();
 };
 
 } // namespace battleship

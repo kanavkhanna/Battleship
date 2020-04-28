@@ -5,8 +5,6 @@
 #ifndef FINALPROJECT_PLAYER_H
 #define FINALPROJECT_PLAYER_H
 
-#include <string>
-
 namespace battleship {
 
 struct Player {
@@ -15,6 +13,5 @@ struct Player {
   size_t score;
 };
 
-} //namespace battleship
-
+}
 #endif  // FINALPROJECT_PLAYER_H

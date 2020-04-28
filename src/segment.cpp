@@ -4,6 +4,8 @@
 
 #include "battleship/segment.h"
 
+#include <cinder/gl/gl.h>
+
 namespace battleship {
 Segment::Segment(Location location)
     : location_(location), visible_{true} {}
@@ -18,5 +20,6 @@ Location Segment::SetLocation(const battleship::Location& location) {
 void Segment::SetVisibility(bool visible) { visible_ = visible; }
 
 bool Segment::IsVisibile() const { return visible_; }
+
 
 }
