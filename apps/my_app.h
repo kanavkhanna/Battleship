@@ -22,15 +22,20 @@ enum class GameState {
 
 class MyApp : public cinder::app::App {
  private:
-  vector<battleship::Location> locations_;
-  battleship::Engine player_;
+  vector<battleship::Location> locations1_;
+  vector<battleship::Location> locations2_;
+  battleship::Engine player1_;
+  battleship::Engine player2_;
   battleship::Board gameBoard_;
-  vector<battleship::Direction> shipDirections_;
+  vector<battleship::Direction> shipDirections1_;
+  vector<battleship::Direction> shipDirections2_;
   std::chrono::time_point<std::chrono::system_clock> last_intact_time_;
   std::chrono::time_point<std::chrono::system_clock> last_pause_time_;
   std::chrono::time_point<std::chrono::system_clock> last_time_;
   battleship::LeaderBoard leaderboard_;
   bool paused_;
+  bool isPlayer1Turn = true;
+  bool isPlayer2Turn = false;
   const std::string player_name_;
   bool printed_game_over_;
   const size_t size_;

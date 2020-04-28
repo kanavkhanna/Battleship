@@ -41,7 +41,8 @@ const char kDifferentFont[] = "Papyrus";
 
 
 MyApp::MyApp()
-    : player_{10,10,30},
+    : player1_{10,10,30},
+      player2_{10,10,30},
       leaderboard_{cinder::app::getAssetPath(kDbPath).string()},
       paused_{false},
       player_name_{"FLAGS_name"},
@@ -78,14 +79,6 @@ void MyApp::update() {
   std::uniform_real_distribution<> dist(3, 10);
   int ship_size = dist(e2);
 
-  vector<battleship::Ship> battleships;
-  if (locations_.size() == kMaxShips && shipDirections_.size() == kMaxShips) {
-    for (int i = 0 ; i< locations_.size(); i++) {
-      battleships.emplace_back(battleship::Ship(kShipSize,locations_.at(i), shipDirections_.at(i)));
-    }
-    player_.battleships_ = battleships;
-    player_.SetShipMapCreated(true);
-  }
 }
 
 void MyApp::draw() {
@@ -99,12 +92,41 @@ void MyApp::draw() {
   if (paused_) return;
 
 
-  cinder::gl::clear();
-  DrawBackground();
-  player_.DrawMap();
+  if (isPlayer1Turn) {
+    cinder::gl::clear();
+    DrawBackground();
+    player1_.DrawMap();
 
-  if (player_.IsShipMapCreated())
-    player_.DrawShips();
+    vector<battleship::Ship> battleships1;
+    if (locations1_.size() == kMaxShips && shipDirections1_.size() == kMaxShips) {
+      for (int i = 0 ; i< locations1_.size(); i++) {
+        battleships1.emplace_back(battleship::Ship(kShipSize,locations1_.at(i), shipDirections1_.at(i)));
+      }
+      player1_.battleships_ = battleships1;
+      player1_.SetShipMapCreated(true);
+    }
+
+    if (player1_.IsShipMapCreated())
+      player1_.DrawShips();
+
+  }
+  if (isPlayer2Turn) {
+    cinder::gl::clear();
+    DrawBackground();
+    player2_.DrawMap();
+
+    vector<battleship::Ship> battleships2;
+    if (locations2_.size() == kMaxShips && shipDirections2_.size() == kMaxShips) {
+      for (int i = 0 ; i< locations2_.size(); i++) {
+        battleships2.emplace_back(battleship::Ship(kShipSize,locations2_.at(i), shipDirections2_.at(i)));
+      }
+      player2_.battleships_ = battleships2;
+      player2_.SetShipMapCreated(true);
+    }
+
+    if (player2_.IsShipMapCreated())
+      player2_.DrawShips();
+  }
 
 
 }
@@ -114,25 +136,37 @@ void MyApp::keyDown(KeyEvent event) {
     case KeyEvent::KEY_UP:
     case KeyEvent::KEY_k:
     case KeyEvent::KEY_w: {
-      shipDirections_.emplace_back(battleship::Direction::kUp);
+      if (isPlayer1Turn)
+        shipDirections1_.emplace_back(battleship::Direction::kUp);
+      else if (isPlayer2Turn)
+        shipDirections2_.emplace_back(battleship::Direction::kUp);
       break;
     }
     case KeyEvent::KEY_DOWN:
     case KeyEvent::KEY_j:
     case KeyEvent::KEY_s: {
-      shipDirections_.emplace_back(battleship::Direction::kDown);
+      if (isPlayer1Turn)
+        shipDirections1_.emplace_back(battleship::Direction::kDown);
+      else if (isPlayer2Turn)
+        shipDirections2_.emplace_back(battleship::Direction::kDown);
       break;
     }
     case KeyEvent::KEY_LEFT:
     case KeyEvent::KEY_h:
     case KeyEvent::KEY_a: {
-      shipDirections_.emplace_back(battleship::Direction::kLeft);
+      if (isPlayer1Turn)
+        shipDirections1_.emplace_back(battleship::Direction::kLeft);
+      else if (isPlayer2Turn)
+        shipDirections2_.emplace_back(battleship::Direction::kLeft);
       break;
     }
     case KeyEvent::KEY_RIGHT:
     case KeyEvent::KEY_l:
     case KeyEvent::KEY_d: {
-      shipDirections_.emplace_back(battleship::Direction::kRight);
+      if (isPlayer1Turn)
+        shipDirections1_.emplace_back(battleship::Direction::kRight);
+      else if (isPlayer2Turn)
+        shipDirections2_.emplace_back(battleship::Direction::kRight);
       break;
     }
     case KeyEvent::KEY_p: {
@@ -173,13 +207,19 @@ void MyApp::keyDown(KeyEvent event) {
       ResetGame();
       break;
     }
+    case KeyEvent::KEY_2: {
+      isPlayer1Turn = !isPlayer1Turn;
+      isPlayer2Turn = !isPlayer2Turn;
+      break;
+    }
   }
 }
 
 
 
 void MyApp::ResetGame() {
-  player_.Reset();
+  player1_.Reset();
+  player2_.Reset();
   paused_ = false;
   printed_game_over_ = false;
   state_ = GameState::kPlaying;
@@ -275,7 +315,7 @@ void MyApp::DrawShips() {
     cinder::gl::drawSolidCircle({loc.Row(),loc.Col()}, 10);
   }*/
 
-  for (battleship::Ship& ship : player_.battleships_) {
+  for (battleship::Ship& ship : player1_.battleships_) {
     for (battleship::Location& location : ship.ShipLocation()) {
       battleship::Location loc = gameBoard_.LocationOnBoard(location);
       loc = loc.GetCenter();
@@ -301,8 +341,14 @@ void MyApp::DrawMap() {
 }
 void MyApp::mouseDown(cinder::app::MouseEvent event) {
 
-  if (!player_.IsShipMapCreated()) {
-    locations_.emplace_back(event.getX(),event.getY());
+  if (isPlayer1Turn) {
+    if (!player1_.IsShipMapCreated()) {
+      locations1_.emplace_back(event.getX(),event.getY());
+    }
+  } else if (isPlayer2Turn) {
+    if (!player2_.IsShipMapCreated()) {
+      locations2_.emplace_back(event.getX(),event.getY());
+    }
   }
 
 }
