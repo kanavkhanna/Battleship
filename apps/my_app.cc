@@ -316,8 +316,8 @@ void MyApp::PlayerTask(battleship::Engine& player, battleship::Engine& opponent)
     attackLocations_.clear();
   }
   if (opponent.IsGameOver()) {
-    state_ = GameState::kGameOver;
     winner_name_ = player.player_name_;
+    state_ = GameState::kGameOver;
   }
 }
 void MyApp::PlayerDraw(battleship::Engine& player, battleship::Engine& opponent) {
