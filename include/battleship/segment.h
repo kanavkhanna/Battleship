@@ -15,11 +15,9 @@ class Segment {
 
  public:
   explicit Segment(Location location);
-  Location GetLocation() const;
-  Location SetLocation(const Location&);
+  Location GetLocation();
   void SetVisibility(bool visible);
   bool IsVisibile() const;
-  void Draw();
 };
 
 } // namespace battleship

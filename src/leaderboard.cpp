@@ -48,5 +48,13 @@ auto LeaderBoard::RetrieveHighScores(const Player& player,
                   <<player.name<<limit;
   return GetPlayers(&rows);
 }
+size_t LeaderBoard::RetrievePlayerScore(std::string name) {
+  auto row = db_ << "select max(score) from leaderboard where name = ?;"
+                  <<name;
+  size_t score;
+  row >> score;
 
+  return (score + 1);
 }
+
+}  // namespace battleship

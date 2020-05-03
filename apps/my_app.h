@@ -16,33 +16,30 @@
 namespace myapp {
 
 enum class GameState {
+  kWelcome,
   kPlaying,
   kGameOver,
 };
 
 class MyApp : public cinder::app::App {
  private:
-  vector<battleship::Location> locations1_;
-  vector<battleship::Location> locations2_;
   battleship::Engine player1_;
   battleship::Engine player2_;
   battleship::Board gameBoard_;
-  vector<battleship::Direction> shipDirections1_;
-  vector<battleship::Direction> shipDirections2_;
+  vector<battleship::Direction> shipDirections_;
+  vector<battleship::Location> shipLocations_;
+  vector<battleship::Location> attackLocations_;
   std::chrono::time_point<std::chrono::system_clock> last_intact_time_;
   std::chrono::time_point<std::chrono::system_clock> last_pause_time_;
-  std::chrono::time_point<std::chrono::system_clock> last_time_;
   battleship::LeaderBoard leaderboard_;
   bool paused_;
   bool isPlayer1Turn = true;
   bool isPlayer2Turn = false;
-  const std::string player_name_;
+  std::string winner_name_;
   bool printed_game_over_;
   const size_t size_;
-  const size_t speed_;
   GameState state_;
   const size_t tile_size_;
-  size_t time_left_;
   std::vector<battleship::Player> top_players_;
   std::vector<battleship::Player> current_player_info_;
 
@@ -52,8 +49,7 @@ class MyApp : public cinder::app::App {
   void update() override;
   void draw() override;
   void keyDown(cinder::app::KeyEvent) override;
-  //void mouseMove(cinder::app::MouseEvent) override;
-  //void mouseDrag(cinder::app::MouseEvent) override;
+
   void mouseDown(cinder::app::MouseEvent) override;
 
 
@@ -67,10 +63,12 @@ class MyApp : public cinder::app::App {
 
   void DrawGameOver();
   void DrawScoreBoard();
+  void DrawWelcomeScreen();
 
-  void DrawShips();
+  void PlayerTask(battleship::Engine&, battleship::Engine&);
 
-  void DrawMap();
+  void PlayerDraw(battleship::Engine&,battleship::Engine&);
+
 
 };
 

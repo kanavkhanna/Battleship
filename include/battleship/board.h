@@ -23,7 +23,7 @@ class Board {
  public:
   Board(size_t tilesize, int row);
 
-  Location LocationOnBoard(Location & loc);
+  Location LocationOnBoard(Location& loc);
 
   size_t BoardSize();
 };

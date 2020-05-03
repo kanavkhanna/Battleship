@@ -19,12 +19,10 @@ namespace battleship {
 
 class Ship {
  private:
-  std::deque<Segment> shipBody_;
-  bool is_destroyed_;
-  cinder::gl::TextureRef texture_;
+  vector<Segment> shipBody_;
 
  public:
-  Ship(int size, Location location, battleship::Direction direction);
+  Ship(Location location, battleship::Direction direction);
 
   Ship();
 
@@ -32,25 +30,14 @@ class Ship {
   size_t Size() const;
 
   //returns the whole ship
-  std::deque<Segment> GetShip();
+  std::vector<Segment>& GetShip();
 
-  //Destroys a part of the ship
-  void DestroyPart(const Segment&);
-
-  bool IsDestroyed() const;
+  bool IsDestroyed();
 
   Segment Tail() const;
   Segment Head() const;
 
-  std::deque<Segment>::iterator begin();
-  std::deque<Segment>::iterator end();
-  std::deque<Segment>::const_iterator cbegin() const;
-  std::deque<Segment>::const_iterator cend() const;
-
-  void Draw();
-
   vector<Location> ShipLocation();
-
 
 };
 

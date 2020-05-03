@@ -28,6 +28,8 @@ class LeaderBoard {
   // The size of the list should be no greater than `limit`.
   std::vector<Player> RetrieveHighScores(const Player&, const size_t limit);
 
+  size_t RetrievePlayerScore(std::string);
+
  private:
   sqlite::database db_;
 };

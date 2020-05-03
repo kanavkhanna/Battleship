@@ -24,43 +24,29 @@ class Engine {
   std::mt19937 rng_;
   std::uniform_real_distribution<double> uniform_;
   bool isShipMapCreated_ = false;
+  vector<Location> successfulAttackLocs_;
   battleship::Board gameBoard_;
+
+  void Attack(Location location, vector<Ship>& opponentBattleships);
 
  public:
   // Creates a new battleship game of the given size.
-  Engine(size_t width, size_t height,size_t tile_size_);
+  Engine(std::string,size_t width, size_t height,size_t tile_size_);
 
   // Creates a new battleship game of the given size, seeded.
-  Engine(size_t width, size_t height,size_t tile_size_, unsigned seed);
+  Engine(std::string,size_t width, size_t height,size_t tile_size_, unsigned seed);
 
   // Start the game over.
   void Reset();
 
-  // Play the game
-  void PlayGame();
-
-  //attacks the opponent's ship
-  void Attack(Location location, const vector<Ship>& opponentBattleships);
-
-  // returns the locations the user has already attacked
-  vector<Location> GetAttackedLocations();
-
-  //checks if a location is attacked or not
-  auto IsAttacked(Location location) -> bool;
+  //attacks the opponent's ships
+  void Attack(vector<battleship::Location>&, vector<Ship>& opponentBattleships);
 
   //returns whether all the ships are destroyed or not
   bool IsGameOver();
 
-  //sets the ships locations
-  void SetShipLocation(battleship::Location location, battleship::Direction direction);
-
-  //gets the location of where to set the ship
-  auto GetLocationForShip() -> Location;
-
-  //gets the orientation of the ship to set
-  Direction GetDirectionForShip();
-
-  auto GetShip(Location location) -> Ship;
+  //sets the ships of the player
+  void SetShips(vector<Location>&, vector<Direction>&);
 
   auto IsShipMapCreated() -> bool;
 
@@ -68,13 +54,17 @@ class Engine {
 
   vector<Ship> battleships_;
 
-  void AddShip(Location location, Direction direction);
-
   void DrawShips();
 
   void DrawMap();
+
+  void DrawMissile();
+
+  bool showAttackLocs_ = false;
+
+  const std::string player_name_;
 };
 
-}
+}  // namespace battleship
 
 #endif  // FINALPROJECT_ENGINE_H

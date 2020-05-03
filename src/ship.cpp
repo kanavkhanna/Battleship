@@ -5,17 +5,20 @@
 #include "battleship/ship.h"
 #include <cinder/gl/gl.h>
 #include <cinder/gl/draw.h>
+#include <random>
 
 namespace battleship {
 
 Ship::Ship() {}
 
-Ship::Ship(int size, Location location, battleship::Direction direction) {
-  texture_ = cinder::gl::Texture2d::create(cinder::loadImage(
-      "/Users/kanavkhanna/Downloads"
-      "/cinder_0.9.2_mac/my-projects/final-project-kanavk26/assets/ship.jpg" ));
+Ship::Ship(Location location, battleship::Direction direction) {
+  //setting up random distribution for ship size
+  std::random_device rd;
+  std::mt19937 e2(rd());
+  std::uniform_real_distribution<> dist(3, 10);
+  int ship_size = dist(e2);
 
-  for (int i = 0; i < size; i++) {
+  for (int i = 0; i < ship_size; i++) {
     switch (direction) {
       case Direction::kUp:
         shipBody_.emplace_back((location - Location(0, i*30)));
@@ -35,21 +38,12 @@ Ship::Ship(int size, Location location, battleship::Direction direction) {
 
 size_t Ship::Size() const {return shipBody_.size();}
 
-std::deque<Segment>::const_iterator Ship::cbegin() const {return shipBody_.cbegin();}
-
-std::deque<Segment>::const_iterator Ship::cend() const { return shipBody_.cend();}
-
-std::deque<Segment>::iterator Ship::begin() { return shipBody_.begin();}
-
-std::deque<Segment>::iterator Ship::end() { return shipBody_.end();}
-
 Segment Ship::Head() const { return shipBody_.front();}
 
 Segment Ship::Tail() const { return shipBody_.back();}
 
-bool Ship::IsDestroyed() const {return is_destroyed_;}
 
-void Ship::DestroyPart(const Segment& shipPart) {
+/*void Ship::DestroyPart(const Segment& shipPart) {
   for (Segment& part : shipBody_) {
     if (part.GetLocation() == shipPart.GetLocation()) {
       part.SetVisibility(false);
@@ -59,8 +53,18 @@ void Ship::DestroyPart(const Segment& shipPart) {
   for (Segment& part : shipBody_) {
     is_destroyed_ = !part.IsVisibile();
   }
+}*/
+
+bool Ship::IsDestroyed() {
+  for (Segment& part : shipBody_) {
+    if (part.IsVisibile()) {
+      return false;
+    }
+  }
+  return true;
 }
-std::deque<Segment> Ship::GetShip() { return shipBody_; }
+
+std::vector<Segment>& Ship::GetShip() { return shipBody_; }
 
 vector<Location> Ship::ShipLocation() {
   vector<Location> location;
