@@ -91,7 +91,6 @@ void battleship::Engine::DrawMissile() {
 }
 
 void Engine::Attack(vector<battleship::Location>& attackLocs, vector<Ship>& opponentBattleships) {
-  opponent_ = opponentBattleships;
   for (Location& location : attackLocs) {
     attackLocations_.emplace_back(location);
     Attack(location, opponentBattleships);
