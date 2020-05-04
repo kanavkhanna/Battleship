@@ -63,10 +63,12 @@ int mod(int a, int b) {
 Location Location::operator%(const Location& rhs) const {
   return {mod(row_, rhs.row_), mod(col_, rhs.col_)};
 }
+
 auto Location::GetCenter() -> Location {
   int x = row_, y = col_;
   return {x*30+15,y*30+15};
 }
+
 Location Location::operator/(const int toDivide) {
   return {(row_)/toDivide,
           (col_)/toDivide};
