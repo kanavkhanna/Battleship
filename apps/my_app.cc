@@ -161,17 +161,6 @@ void MyApp::keyDown(KeyEvent event) {
       }
       break;
     }
-    case KeyEvent::KEY_0: {
-      paused_ = !paused_;
-
-      if (paused_) {
-        last_pause_time_ = system_clock::now();
-      } else {
-        last_intact_time_ += system_clock::now() - last_pause_time_;
-      }
-      DrawScoreBoard();
-      break;
-    }
     case KeyEvent::KEY_r: {
       ResetGame();
       break;
@@ -320,6 +309,7 @@ void MyApp::PlayerTask(battleship::Engine& player, battleship::Engine& opponent)
     state_ = GameState::kGameOver;
   }
 }
+
 void MyApp::PlayerDraw(battleship::Engine& player, battleship::Engine& opponent) {
   cinder::gl::clear();
   DrawBackground();
@@ -356,7 +346,7 @@ void MyApp::DrawWelcomeScreen() {
       "To setup your ships, simply click on the starting location you desire, "
       "and specify the direction of the ship using the arrow keys. To choose the attacking position, "
       "just click on the box you want. \n To swtich between players, use key 2, for attack mode and ship mode, use key 4. "
-      "Press p to pause, r to reset game, or 0 for scores"
+      "Press p to pause, r to reset game"
       "\nBest of luck! \n Press m when ready.";
   PrintText(text, Color::white(),{800, 500},getWindowCenter());
 }
