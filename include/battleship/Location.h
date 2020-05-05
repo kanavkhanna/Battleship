@@ -41,6 +41,7 @@ class Location {
   Location operator/(const int toDivide);
   Location operator-() const;
 
+  //returns the center of the tile
   auto GetCenter() -> Location;
 
 };

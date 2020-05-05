@@ -48,20 +48,28 @@ class Engine {
   //sets the ships of the player
   void SetShips(vector<Location>&, vector<Direction>&);
 
+  //checks if the ship map is created
   auto IsShipMapCreated() -> bool;
 
+  //sets the value whether the ship map is created or not
   void SetShipMapCreated(bool value);
 
+  //the battleships of a player
   vector<Ship> battleships_;
 
+  //draws the ships on the board
   void DrawShips();
 
+  //draws the board map
   void DrawMap();
 
+  //draws the missiles on the board
   void DrawMissile();
 
+  //boolean variable for attack locations
   bool showAttackLocs_ = false;
 
+  //player name
   const std::string player_name_;
 };
 

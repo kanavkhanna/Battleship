@@ -28,6 +28,7 @@ class LeaderBoard {
   // The size of the list should be no greater than `limit`.
   std::vector<Player> RetrieveHighScores(const Player&, const size_t limit);
 
+  //Returns the score of the current player
   size_t RetrievePlayerScore(std::string);
 
  private:

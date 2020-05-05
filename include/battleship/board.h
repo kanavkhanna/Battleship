@@ -21,10 +21,13 @@ class Board {
   map<int, Location> board_;
 
  public:
+  //constructor for Board
   Board(size_t tilesize, int row);
 
+  //Returns the location of the window in terms of that of the board (i.e in terms of rows and columns)
   Location LocationOnBoard(Location& loc);
 
+  //returns the board size
   size_t BoardSize();
 };
 

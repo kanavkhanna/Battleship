@@ -65,8 +65,10 @@ class MyApp : public cinder::app::App {
   void DrawScoreBoard();
   void DrawWelcomeScreen();
 
+  //executes the task of a player: create ships, or attack
   void PlayerTask(battleship::Engine&, battleship::Engine&);
 
+  //executes the drawing part of the game, depending on the user commands (i.e. for drawing ships or missiles)
   void PlayerDraw(battleship::Engine&,battleship::Engine&);
 
 

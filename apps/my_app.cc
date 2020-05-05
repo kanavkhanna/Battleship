@@ -12,10 +12,8 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
-#include <ctime>
 #include <random>
 #include <string>
-#include <time.h>
 #include <gflags/gflags.h>
 
 namespace myapp {

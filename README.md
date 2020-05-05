@@ -12,7 +12,7 @@ I plan on creating the famous Battleship game.
 
 I have always loved to play Battleship, and it has often been my go-to entertainment source on flights, which is why I would like to create my own version of it.
 
-Along with the built-in libraries in C++ like the random library and STL (for vectors and maps), I will also implement the Cinder library, i.e. Cinder Blocks, chiefly Render GL.
+Along with the built-in libraries in C++ like the random library and STL (for vectors and maps), I will also implement the Cinder library, i.e. Cinder Blocks, chiefly Render GL, GFLAGS and SQL database.
 
 Timeline:
 

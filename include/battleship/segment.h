@@ -15,8 +15,14 @@ class Segment {
 
  public:
   explicit Segment(Location location);
+
+  //returns the location of the segment
   Location GetLocation();
+
+  //sets the visibility of the segment
   void SetVisibility(bool visible);
+
+  //checks the visibility of the segment
   bool IsVisibile() const;
 };
 
