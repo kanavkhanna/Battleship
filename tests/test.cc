@@ -45,7 +45,7 @@ TEST_CASE("Board operations", "[board]") {
   Board board = Board(30, 27);
 
   SECTION("Board size") {
-    REQUIRE(board.BoardSize() == 27*27);
+    REQUIRE(board.BoardSize() == 27);
   }
 
   SECTION("Location on board") {

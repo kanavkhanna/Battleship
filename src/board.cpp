@@ -25,6 +25,6 @@ auto battleship::Board::LocationOnBoard(
   Location location = loc/30;
   return location;
 }
-size_t Board::BoardSize() { return boardVec_.size()*boardVec_.at(0).size(); }
+size_t Board::BoardSize() { return boardVec_.size();}
 
 } //namespace battleship
